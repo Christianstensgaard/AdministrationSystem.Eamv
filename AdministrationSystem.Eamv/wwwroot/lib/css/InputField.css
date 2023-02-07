@@ -1,0 +1,67 @@
+﻿.user-box {
+    position: relative;
+}
+
+    .user-box input {
+        height: 100%;
+        width: 100%;
+        padding: 10px 0;
+        font-size: 16px;
+        color: black;
+        margin-bottom: 20px;
+        border: none;
+        border-bottom: 1px solid black;
+        outline: none;
+        background: transparent;
+    }
+
+        .user-box input:hover {
+            border-bottom: 1px solid orange;
+        }
+
+        .user-box input:focus {
+            border-bottom: 1px solid orange;
+        }
+
+
+.input {
+    background-color: transparent;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    font-size: 18px;
+    height: 100%;
+    outline: 0;
+    padding: 4px 20px 0;
+    width: 100%;
+}
+
+.placeholder {
+    color: black;
+    opacity: 60%;
+    left: 0px;
+    line-height: 14px;
+    pointer-events: none;
+    position: absolute;
+    transform-origin: 0 50%;
+    transition: transform 500ms;
+    top: 16px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.input:focus ~ .placeholder,
+.input:not(:placeholder-shown) ~ .placeholder {
+    transform: translateY(-24px) translateX(0px) scale(0.85);
+}
+
+.input:not(:placeholder-shown) ~ .placeholder {
+    color: black;
+    opacity: 100%;
+}
+
+.input:focus ~ .placeholder {
+    color: black;
+    font-weight: bold;
+    opacity: 100%;
+}

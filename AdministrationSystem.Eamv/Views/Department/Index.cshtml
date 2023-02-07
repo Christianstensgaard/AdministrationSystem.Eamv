@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model Department
+
+
+<div class="flex vertical" style="margin-top: 2em;">
+    <div class="full-Width center-all mar-10">
+        <div class="background-container-white shadow-s" style="max-width:300px;padding-left:25px;padding-right:25px;border-radius: 10px;">
+            <h1 class="txt-center border-bottom-1-black ff" style="padding-bottom:20px; margin-bottom:40px;">Opret Afdeling</h1>
+            <div class="pad-5">
+                <form asp-action="Index" method="post">
+                    <div class="user-box" style="width:290px;">
+                        <input class="input" type="text" asp-for="DepartmentName" autocomplete="off" placeholder=" " required/>
+                        <label class="placeholder">Afdelingsnavn*</label>
+                    </div>
+                    <!--Add Banner button-->
+                    <button class="btn btn-background-darkBlue ff f-22 full-Width" style="margin-top:20px; margin-bottom:10px;" type="submit">Tilføj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="pagetitle" style="margin-top:3em; width:50em;">
+        <h1 class="ff f-36">Afdelings oversigt</h1>
+    </div>
+
+    <!--This here loads all the Departments into This view. -->
+    <div class="flex flex-center" style="margin-top:8%;">
+        @foreach (Department d in ViewBag.Departments)
+        {
+            <div class="mar-5">
+                <partial name="DepartmentPartialview" model="d" />
+            </div>
+        }
+    </div>
+</div>
+
+
+
+

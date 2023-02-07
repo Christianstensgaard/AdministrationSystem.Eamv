@@ -1,0 +1,54 @@
+﻿@model AdministrationSystem.Eamv.Models.User
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Administration System</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/css/StyleSheet.css" />
+    <link rel="stylesheet" href="~/lib/css/Login.css" />
+</head>
+
+<body>
+    <header class="nav-link">
+        <img class="logo" style="padding:20px;" src="/Img/EAMV_logo-ORANGE-NEGATIV.png" />
+    </header>
+
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <partial name="/Views/shared/Feedback.cshtml">
+
+    <div class="login-box">
+        <h1 style=" height:50px;">Login</h1>
+        <form asp-action="Index" method="post">
+            <div style="margin-bottom:30px">
+                <span style="color:white;font-weight:bold;">@ViewBag.IncorrectLogin</span>
+                @if (@ViewBag.IncorrectLogin != null) 
+                {
+                    <img src="/Img/ErrorIcon.png" alt="LoginError" style="position:absolute; top:9em; left:20em;" />
+                }
+            </div>
+
+            <div class="flex vertical">
+                <span class="foreground-red ff f-16" asp-validation-for="UserName"></span>
+                <span class="foreground-red ff f-16" asp-validation-for="Password"></span>
+            </div>
+
+            <div class="user-box">
+                <input type="text" asp-for="UserName" autocomplete="off" required>
+                <label>Brugernavn</label>
+            </div>
+
+            <div class="user-box">
+                <input type="password" asp-for="Password" required="">
+                <label>Kodeord</label>
+            </div>
+
+            <button>Login</button>
+        </form>
+    </div>
+</body>
+</html>

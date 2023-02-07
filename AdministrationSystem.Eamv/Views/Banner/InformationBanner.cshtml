@@ -1,0 +1,111 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+@model Banner
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/lib/css/CheckBox.css">
+
+<style>
+/* Override styling for the checkmark/indicator, to fit this page */
+.checkbox-container .checkmark:after {
+  left: 5px;
+  top: 1.5px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+</style>
+
+<div class="flex vertical" style="margin-top: 2em;">
+    <div class="full-Width center-all mar-10">
+        <div class="background-container-white shadow-s" style="max-width:300px;padding-left:25px;padding-right:25px;border-radius: 10px;">
+            <h1 class="txt-center border-bottom-1-black ff" style="padding-bottom:20px;" >Opret Breaking</h1>
+            <div class="pad-5">
+                <form asp-action="InformationBanner" method="post">
+                    @if (Model != null)
+                    {
+                        <div>
+                            <label asp-for="BannerId">bannerid</label>
+                            <input asp-for="BannerId" readonly>
+                        </div>
+                    }
+
+                    <div> <!--Holding all input fields-->
+                        <span asp-validation-for="BannerName"></span>
+                        <div class="user-box" style="margin-top:20px;width:290px;">
+                            <input class="input" type="text" asp-for="BannerName" autocomplete="off" placeholder=" " required />
+                            <label class="placeholder">Title* (vises ikke på skærmen)</label>
+                        </div>
+
+                        <div class="user-box" style="margin-top:10px;width:290px;">
+                            <input class="input" type="text" asp-for="BannerDescription" autocomplete="off" placeholder=" "  />
+                            <label class="placeholder">Emne*</label>
+                        </div>
+                    </div>
+
+                    <div> <!--Holding Department options-->
+                        <select class="full-Width background-transparant txt-even f-16" style="margin-top:20px;" asp-for="Department.DepartmentId" id="input" required>
+                            @foreach (Department d in ViewBag.Departments)
+                            {
+                                <option value="@d.DepartmentId">@d.DepartmentName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="flex horizontal center-all" style="margin-top: 25px;margin-bottom:10px;">
+                        <!--Holding Check-box, controlling state of the banner -->
+                        <label class="checkbox-container ff" style="font-size: 16px;">
+                            Start som aktiv
+                            <input asp-for="IsActive" value="false" type="checkbox" onchange="this.value=this.checked">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                    <!--Add Banner button-->
+                    <button class="btn btn-background-darkBlue full-Width ff f-22" style="margin-bottom: 10px; margin-top:15px;" type="submit">Tilføj</button>
+                </form> 
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="pagetitle" style="margin:auto; margin-bottom:2em; width:50em;">
+        <h1 class="ff f-36">Banner oversigt</h1>
+    </div>
+    <!--Loading All current  Banners into view-->
+    <div class="flex" style="margin:auto;justify-content:center; align-content:center;width:100em;">
+        @foreach (Banner d in ViewBag.Banners)
+        {
+            <partial name="BannerPartialView" model="d" />
+        }
+    </div>
+</div>
+
+<div class="full-Width">
+    <!--Current -->
+    <marquee class="ff f-26 bold" style="margin-top:25px; border-bottom: 1px solid black;border-top: 1px solid black;"> Herning banner:
+        @foreach(Banner b in ViewBag.BannersHerning)
+        {
+            if(b.IsActive == true)
+            {
+                <label class="foreground-black ff f-22" style="margin-right: 3em;"  id="lblAnything" >@b.BannerDescription</label>
+            }
+        }
+    </marquee>
+
+    <marquee class="ff f-26 bold" style="border-bottom: 1px solid black;border-top: 1px solid black;"> Holstebro banner:
+        @foreach(Banner b in ViewBag.BannersHolstebro)
+        {
+            if(b.IsActive == true)
+            {
+                <label class="foreground-black ff f-22" style="margin-right: 3em;" id="lblAnything"> @b.BannerDescription</label>
+            }
+        }
+    </marquee>
+</div>

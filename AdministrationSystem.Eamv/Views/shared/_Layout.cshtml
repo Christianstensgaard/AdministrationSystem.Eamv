@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Information Screen</title>
+    <link rel="stylesheet" href="~/lib/css/StyleSheet.css">
+    <link rel="stylesheet" href="~/lib/css/InputField.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <header class="nav-link">
+        <img class="logo" style="padding:20px;" src="/Img/EAMV_logo-ORANGE-NEGATIV.png"/>  
+        <nav>
+           <ul class="nav-link">
+                <!--UserStorie 384-->
+                <li><a class="btn-animation-base btn-animation" asp-controller="Activity" asp-action="CreateActivity">Aktivitet</a></li>
+                <li><a class="btn-animation-base btn-animation" asp-controller="Banner" asp-action="InformationBanner">Banner</a></li>
+                <li><a class="btn-animation-base btn-animation" asp-controller="Activity" asp-action="SearchActivity">Søg Aktiviteter</a></li>
+                <li><a class="btn-animation-base btn-animation" asp-controller="Preview" asp-action="Index">Forhåndsvisning</a></li>
+
+                <li><a id="btnInfoMenu" class="btn-animation-base btn-animation" onclick="actionHandler(1)">Info-Skærm(live)</a></li>
+                <li><a id="btndropdown" class="btn-animation-base btn-animation" onclick="actionHandler(0)">Admin</a></li>
+
+           </ul>
+                <div id="adminMenu" style="display:none;">
+                    <ul class="flex" style="justify-content:end; margin-top:5px; border-top: 1px solid orange">
+                        <li><a class="btn-animation-base btn-animation" asp-controller="Room" asp-action="RoomList">Lokaler</a></li>
+                        <li><a class="btn-animation-base btn-animation" asp-controller="Department" asp-action="Index">Afdelinger</a></li>
+                        @if (this.User.HasClaim("AdminUser", "true"))
+                        {
+                            <li><a class="btn-animation-base btn-animation" asp-controller="Admin" asp-action="Users">Bruger</a></li>
+                        }
+                    </ul>
+                </div>
+
+
+                <div id="infoMenu" style="display:none;">
+                    <ul class="flex" style="justify-content:end; margin-top:5px; border-top: 1px solid orange">
+                        <!--Liste over Aktiviteter-->
+                    <li><a class="btn-animation-base btn-animation" target="_blank" asp-controller="Preview" asp-action="InfoScreenHolstebro">Info-skærm (Holstebro)</a></li>
+                    <li><a class="btn-animation-base btn-animation" target="_blank" asp-controller="Preview" asp-action="InfoScreenHerning">Info-skærm (Herning) </a></li>
+                    </ul>
+                </div>
+
+        </nav>
+        <a class="btn-animation-base btn-animation" asp-controller="Login" asp-action="Logout">Logud</a>
+    </header>
+
+    <div>
+        <partial name="Feedback.cshtml" />
+    </div>
+        
+    <div class="flex flex-center">@RenderBody()</div>
+
+    <script src="/lib/js/NavigationDropDown.js"></script>
+</body>
+</html>

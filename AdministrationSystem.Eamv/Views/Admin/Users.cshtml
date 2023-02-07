@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="full-Width header-like background-darkBlue-1" style="border-top:2px solid orange">
+    <p></p>
+    <nav class="nav-link" style="margin-top:0;">
+        <ul>
+            <li><a class="btn background-darkBlue foreground-white" asp-controller="Admin" asp-action="CreateUser">Opret bruger</a></li>
+        </ul>
+    </nav>
+    <p></p>
+</div>
+
+<div>
+    <div class="pagetitle" style="margin:auto; margin-top:3em; width:50em;">
+        <h1 class="ff f-36">Bruger oversigt</h1>
+    </div>
+
+    <div class="flex flex-center" style="margin-top: 3em;">
+        @foreach (User u in ViewBag.Users)
+        {
+            <div class="mar-5">
+                <partial name="UsersPartialview" model="u" />
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "_Layout";
+}    
+@model User
+
+<div class="container shadow-l">
+    <div class="vecform w-250" style="width:100%; height:23em;">
+        <h1 class="foreground-black ff f-36 bold">@(Model != null ? "Ændre Bruger" : "Opret Bruger")</h1>
+        <form asp-action="CreateUser" method="post" class="">
+            @if (Model != null)
+            {
+                <span class="foreground-white" asp-validation-for="UserId"></span>
+                <div>
+                    <input asp-for="UserId" type="hidden" class="ff foreground-white background-transparant" readonly>
+                </div>
+            } 
+
+            <span class="foreground-red" asp-validation-for="UserName"></span>
+            <div class="user-box" style="margin-top:40px;">
+                <input class="input" type="text" asp-for="UserName" autocomplete="off" placeholder=" " required />
+                <label class="placeholder">Brugernavn*</label>
+            </div>
+
+            <div>
+                <!--Indeholder Password label og Input-->
+                @if (Model == null)
+                {
+                    <span class="foreground-red" asp-validation-for="Password"></span>
+                    <div class="user-box" style="margin-top:10px;">
+                        <input class="input" type="text" asp-for="Password" autocomplete="off" placeholder=" " required />
+                        <label class="placeholder">Password*</label>
+                    </div>
+                }
+
+                @*Jeg har lavet en fejl her og slettet password*@
+            </div>
+
+            <div>
+                <!--Indeholder Userrolle dropdown-->
+                <label class="foreground-black headliner" >@(Model != null ? "Rolle*" : "")</label>
+                <span asp-validation-for="UserRole"></span>
+                <select asp-for="UserRole" class="txt-even foreground-black background-transparant ff f-16" style="@(Model != null ? "margin-top:5px;" : "margin-top:15px;")" required>
+                        <option value="" disabled selected hidden>Rolle</option>
+                        <option value="Standard">Standard</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+            </div>
+
+            <div>
+                <button class="btn btn-background-darkBlue full-Width ff f-16" style="height:2em; opacity:1; margin-top: 35px;" type="submit">@(Model == null ? "Opret" : "Gem")</button>
+            </div>
+        </form>
+    </div> 
+</div>

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Fejl 404</title>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.1/gsap.min.js"></script>
+    <link rel="stylesheet" href="~/lib/css/StyleSheet.css" />
+    <link rel="stylesheet" href="~/lib/css/404page.css" />
+
+</head>
+
+<body>
+    <header class="nav-link">
+        <img class="logo" style="padding:20px;" src="/Img/EAMV_logo-ORANGE-NEGATIV.png" />
+    </header>
+
+    <div class="container404">
+        <h1 class="first-four">4</h1>
+        <div class="cog-wheel1">
+            <div class="cog1">
+                <div class="top"></div>
+                <div class="down"></div>
+                <div class="left-top"></div>
+                <div class="left-down"></div>
+                <div class="right-top"></div>
+                <div class="right-down"></div>
+                <div class="left"></div>
+                <div class="right"></div>
+            </div>
+        </div>
+
+        <div class="cog-wheel2">
+            <div class="cog2">
+                <div class="top"></div>
+                <div class="down"></div>
+                <div class="left-top"></div>
+                <div class="left-down"></div>
+                <div class="right-top"></div>
+                <div class="right-down"></div>
+                <div class="left"></div>
+                <div class="right"></div>
+            </div>
+        </div>
+        <h1 class="second-four">4</h1>
+        <a class="wrong-para" style="text-decoration:underline;font-size:30px;" asp-controller="Login" asp-action="Index">Siden kunne ikke findes! Klik her for at komme tilbage på sporet.</a>
+    </div>
+</body>
+</html>
+
+
+<script>
+    $(document).ready(function () {
+        startWheels();
+    });
+
+    function startWheels() {
+        let t1 = gsap.timeline();
+        let t2 = gsap.timeline();
+        let t3 = gsap.timeline();
+
+        t1.to(".cog1",
+            {
+                transformOrigin: "50% 50%",
+                rotation: "+=360",
+                repeat: -1,
+                ease: Linear.easeNone,
+                duration: 8
+            });
+
+        t2.to(".cog2",
+            {
+                transformOrigin: "50% 50%",
+                rotation: "-=360",
+                repeat: -1,
+                ease: Linear.easeNone,
+                duration: 8
+            });
+
+        t3.fromTo(".wrong-para",
+            {
+                opacity: 0
+            },
+            {
+                opacity: 1,
+                duration: 1,
+                stagger: {
+                    repeat: -1,
+                    yoyo: true
+                }
+            });
+    }
+</script>
